@@ -1,3 +1,52 @@
+# Mergington High School Activity Management System
+
+A web application that allows students to view and sign up for extracurricular activities at Mergington High School.
+
+## Main Functionality
+
+- **Browse Activities**: Students can view all available extracurricular clubs and sports, including descriptions, schedules, availability (spots left), and current participants.
+- **Sign Up**: Students register for activities using their school email address.
+- **Remove Participants**: Students can be removed from activities they've joined.
+
+## Key Components
+
+### Backend – `src/app.py`
+A [FastAPI](https://fastapi.tiangolo.com/) REST API with three endpoints:
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/activities` | Returns all activities with details and participant lists |
+| `POST` | `/activities/{activity_name}/signup?email=...` | Signs a student up for an activity |
+| `DELETE` | `/activities/{activity_name}/participants?email=...` | Removes a student from an activity |
+
+Activities are stored in-memory. Each activity has a `description`, `schedule`, `max_participants`, and a `participants` list.
+
+### Frontend – `src/static/`
+A plain HTML/CSS/JavaScript UI served as static files:
+- `index.html` – page structure with activity listing and sign-up form
+- `styles.css` – visual styles
+- `app.js` – fetches activities from the API, renders activity cards with participant lists, and handles sign-up/remove form interactions
+
+### Tests – `tests/test_api.py`
+Pytest test suite covering all three API endpoints using the FastAPI `TestClient`. Tests follow the Arrange-Act-Assert pattern and reset application state between runs.
+
+## Running the Application
+
+```bash
+pip install -r requirements.txt
+uvicorn src.app:app --reload
+```
+
+Then open `http://localhost:8000` in your browser.
+
+## Running Tests
+
+```bash
+pytest
+```
+
+---
+
 <div align="center">
 
 # 🎉 Congratulations rockola1454b! 🎉
